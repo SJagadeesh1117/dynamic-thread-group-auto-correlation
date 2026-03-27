@@ -108,10 +108,6 @@ After starting JMeter:
 - check Thread Group menu for the Dynamic Load Thread Group option
 - use your JMeter UI flow where auto correlation is available and confirm the correlation actions appear
 
-## Included Fix
-
-This jar also includes a fix for result file startup behavior so JMeter keeps stock-style behavior for overwrite/append prompting instead of showing unexpected prompts from disabled listeners.
-
 ## File Integrity
 
 - SHA-256: `478252444b87aec2221f6f09b56198ddccbea7bf27d0c7bf4e8abf928c5ba4ab`
