@@ -46,7 +46,7 @@ Why it helps:
 
 ### 2. Auto Correlation
 
-This feature helps you capture dynamic values from responses and use them in later requests.
+This feature helps you capture dynamic values from recorded traffic and use them in later requests without first running the script manually.
 
 You can use it for:
 
@@ -62,7 +62,7 @@ Why it helps:
 
 - reduces manual extractor creation work
 - speeds up scripting
-- helps you find the right value from request or response data
+- helps you find the right value from recorded request or header data
 - makes test plan maintenance easier
 
 ### 3. Boundary Extractor Support
@@ -156,15 +156,17 @@ After JMeter starts:
 
 ### Step-by-Step
 
-1. Run your script or send a request.
-2. Open the response or request area where the dynamic value appears.
-3. Select the exact value you want to capture.
-4. Right-click and choose the auto correlation option.
-5. Choose the extractor type you want.
-6. Review the detected match and variable details.
-7. Add the extractor to the test plan.
-8. Replace the future hardcoded value with the created variable.
-9. Run the script again and verify the value is now dynamic.
+1. Add `View Results Tree` under `HTTP(S) Test Script Recorder` before recording.
+2. Start recording your flow.
+3. Perform the business flow you want to capture in the browser or client.
+4. Let JMeter save the recorded requests and responses into `View Results Tree`.
+5. Stop recording.
+6. Open the recorded request or request headers where the dynamic value appears.
+7. Select the exact value.
+8. Right-click and choose `Auto Correlation`.
+9. Review the place where the tool found the value and check the detected boundaries.
+10. Create the correlation from that result.
+11. Use the generated variable in the request that needs the dynamic value.
 
 ### Best Use Cases
 
@@ -173,17 +175,23 @@ After JMeter starts:
 - extracting IDs from create-order or create-user responses
 - linking one API request to the next request automatically
 
+### Important Note
+
+- you do not need to run the recorded script first
+- the feature works from the values stored during recording in `View Results Tree`
+- this is especially useful for correlating request values and request headers directly after recording
+
 ## How To Use Boundary Extractor
 
 ### Step-by-Step
 
-1. Find the dynamic value in the response.
-2. Identify the text just before the value.
-3. Identify the text just after the value.
-4. Open the extraction flow from the UI.
-5. Choose `Boundary Extractor`.
-6. Confirm the left boundary and right boundary.
-7. Set a variable name.
+1. Open `View Results Tree`.
+2. Go to the `Response` tab for the recorded sampler.
+3. Select the value you want to extract.
+4. Right-click and choose `Boundary Extractor`.
+5. Let the feature automatically detect the left and right boundaries.
+6. Review the generated boundaries.
+7. Set the variable name if needed.
 8. Add the extractor to the correct sampler.
 9. Use `${variableName}` in the next request where needed.
 
@@ -223,11 +231,11 @@ After JMeter starts:
 
 ### Example 1: Login Token
 
-Use Auto Correlation or Boundary/Regex extraction to capture a token returned after login, then use that variable in the Authorization header of the next request.
+Record the login flow with `HTTP(S) Test Script Recorder`, keep the recorded entries in `View Results Tree`, then select the token from the recorded request or headers and use `Auto Correlation` to generate the correlation.
 
 ### Example 2: Order Creation Flow
 
-Create an order, capture the generated order ID from the response, then use that ID in get-order, update-order, or cancel-order requests.
+Record an order creation flow, then open the recorded response in `View Results Tree`, right-click the generated order ID, choose `Boundary Extractor`, and use the created variable in get-order, update-order, or cancel-order requests.
 
 ### Example 3: Spike Test
 
