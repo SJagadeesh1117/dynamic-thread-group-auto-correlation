@@ -10,7 +10,6 @@ Copy this one jar into your JMeter `lib/ext/` folder to enable:
 - Auto Correlation
 - Boundary Extractor support
 - JSON and Regex assisted correlation flows
-- Stock-style startup result file popup behavior fix
 
 ## What This Jar Is For
 
